@@ -11,18 +11,19 @@ function App() {
   const CurrencyInfo = useCurrencyInfo(from);
   const options = Object.keys(CurrencyInfo);
   const swap = () => {
-    setfrom(to);
+    setFrom(to);
     setTo(from);
   };
   const convert = () => {
-    setConvertedAmount(amount * CurrencyInfo.to);
+    setConvertedAmount(amount * CurrencyInfo[to]);
   };
 
   return (
     <div
       className="w-full h-screen flex flex-wrap justify-center items-center bg-cover bg-no-repeat"
       style={{
-        backgroundColor:`black`
+        backgroundColor:`grey`
+        
       }}
     >
       <div className="w-full">
@@ -31,13 +32,14 @@ function App() {
             onSubmit={(e) => {
               e.preventDefault();
               convert()
+             
             }}
           >
             <div className="w-full mb-1">
               <InputBox label="From"
                 amount={amount}
                 currencyOptions={options}
-                onCurrencyChange={(currency)=>setAmount(amount)}
+                onCurrencyChange={(currency)=>setFrom(currency)}
                 selectCurrency={from}
                 onAmountChange={(amount)=>setAmount(amount)}
             
@@ -55,20 +57,23 @@ function App() {
               </button>
             </div>
             <div className="w-full mt-1 mb-4">
-              <InputBox label="To"
+              <InputBox 
+                  label="To"
                   amount={convertedamount}
                   currencyOptions={options}
                   onCurrencyChange={(currency)=>setTo(currency)}
                   selectCurrency={to} 
                   amountDisabled
-                  CurrencyDisabled
+                  
+                
               />
             </div>
             <button
+              
               type="submit"
               className="w-full bg-blue-600 text-white px-4 py-3 rounded-lg"
             >
-              Convert{from.toUpperCase()  } to {to.toUpperCase()}
+              Convert {from.toUpperCase()  } to {to.toUpperCase()}
             </button>
           </form>
         </div>
